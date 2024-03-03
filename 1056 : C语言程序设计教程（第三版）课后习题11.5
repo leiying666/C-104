@@ -1,0 +1,74 @@
+Description
+有N个学生，每个学生的数据包括学号、姓名、3门课的成绩，从键盘输入N个学生的数据，要求：
+
+1.打印出3门课的总平均成绩（结果保留两位小数）
+
+2.打印平均分最高分学生的数据（包括学号、姓名、3门课成绩）
+
+Input
+学生数量N占一行每个学生的学号（一个四位数字）、姓名（最长四位）、三科成绩（满分为100分）占一行，空格分开。
+Output
+输出第一行为3门课的平均成绩，成绩之间用空格隔开；
+第二行为平均分最高学生的数据（包括学号、姓名与3门课成绩）
+Sample Input
+2
+1795 小明 90 80 70
+1685 阿呆 80 70 60
+Sample Output
+85.00 75.00 65.00
+1795 小明 90 80 70
+
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<string.h>
+#include<errno.h>
+#include<stdlib.h>
+#include<math.h>
+#include<stdio.h>
+
+
+typedef struct//运用typedef构建结构体后,
+{			  //可直接用类型名定义结构体数组student[]
+    char xh[10], xm[20];
+    int c, m, e;
+}stu;//stu为本结构体的类型名
+void input(stu f[], int n)
+{
+    int i;
+    for (i = 0; i < n; i++)
+    {
+        scanf("%s%s%d%d%d", f[i].xh, f[i].xm, &f[i].c, &f[i].m, &f[i].e);
+    }
+}
+void print(stu f[], int n)
+{
+    float s1=0,s2=0,s3=0;
+    int s4[100], tmp=0;
+    int i;
+    for (i = 0; i < n; i++)
+    {
+        s1 += f[i].c;
+        s2 += f[i].m;
+        s3 += f[i].e;
+    }
+    for (i = 0; i < n; i++)
+    {
+        s4[i] = f[i].c + f[i].m + f[i].e;
+        if (i != 0 && s4[i] > s4[tmp])
+        {
+            tmp = i;
+        }
+    }
+    i = tmp;
+    printf("%.2f %.2f %.2f\n", s1 / n, s2 / n, s3 / n);
+    printf("%s %s %d %d %d", f[i].xh, f[i].xm, f[i].c, f[i].m, f[i].e);
+
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    stu student[100];
+    input(student, n);
+    print(student, n);
+    return 0;
+}
