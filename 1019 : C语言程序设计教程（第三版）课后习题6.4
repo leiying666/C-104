@@ -1,0 +1,56 @@
+Description
+求Sn=1!+2!+3!+4!+5!+…+n!之值，其中n是一个数字(n不超过20)。
+Input
+n
+Output
+Sn的值
+Sample Input
+5
+Sample Output
+153
+
+
+位数问题：int的位数有限
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<string.h>
+#include<errno.h>
+#include<stdlib.h>
+#include<math.h>
+#include<stdio.h>
+
+
+int main()
+{
+	int n, s = 0,i,tmp=1;
+	scanf("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		tmp *= i;
+		s += tmp;
+	}
+	printf("%d", s);
+	return 0;
+50%的错误结果，当n过大的时候，会超出int类型的范围
+
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<string.h>
+#include<errno.h>
+#include<stdlib.h>
+#include<math.h>
+#include<stdio.h>
+
+
+int main()
+{
+	long long int n, s = 0,i,tmp=1;
+	scanf("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		tmp *= i;
+		s += tmp;
+	}
+	printf("%lld", s);
+	return 0;
+}
+正确答案，tmp和s都需要为long long型，ll型可以不加int
+
